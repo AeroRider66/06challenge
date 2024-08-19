@@ -2,7 +2,7 @@
 // const apiKey = '{{OpenWeatherMap_API_KEY_HERE}};'
 const apiKey = '{{27b2d129fc17682d877658d7176b8532}};'
 
-https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 const weatherContainer = document.getElementById("weather");
 const city = document.getElementById("city");
@@ -21,6 +21,7 @@ async function fetchWeather() {
         const cnt = 10;
         const cityInputtedByUser = document.getElementById('cityInput').value;
 
+        // how to break this into the daily units?
         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInputtedByUser}&appid=${apiKey}&units=${units}&cnt=${cnt}`;
 
 
@@ -33,48 +34,16 @@ async function fetchWeather() {
             return;
         }
         //Display weather data for each 3 hour increment
-        data.list.forEach(hourlyWeatherData => {
-            const hourlyWeatherDataDiv = createWeatherDescription(hourlyWeatherData);
-            weatherContainer.appendChild(hourlyWeatherDataDiv);
+        data.list.forEach(dailyWeatherData => {
+            const dailyWeatherDataDiv = createWeatherDescription(dailyWeatherData);
+            weatherContainer.appendChild(dailyWeatherDataDiv);
         });
 
         // Display city name based on latitude and longitude
-        city.innerHTML = `Hourly Weather for ${data.city.name}`;
+        city.innerHTML = `Daily Weather for ${data.city.name}`;
 
     } catch (error) {
         console.log(error);
     }
-}
-
-function convertToLocalTime(dt) {
-
-    // Create a new Date object by multiplying the Unix timestamp by 1000 to convert it to milliseconds
-    // Will produce a time in the local timezone of user's computer
-    const date = new Date(dt * 1000);
-
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so add 1
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours() % 12 || 12).padStart(2, '0'); // Convert 24-hour to 12-hour format
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    const period = date.getHours() >= 12 ? 'PM' : 'AM'; // Determine AM/PM
-
-    // Formatted date string in the format: YYYY-MM-DD hh:mm:ss AM/PM
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${period}`;
-
-}
-
-function createWeatherDescription(weatherData) {
-    const { main, dt } = weatherData;
-
-    const description = document.createElement("div");
-    const convertedDateAndTime = convertToLocalTime(dt);
-
-    // '2023-11-07 07:00:00 PM'
-    description.innerHTML = `
-        <div class = "weather_description">${main.temp}${temperatureSymobol} - ${convertedDateAndTime.substring(10)} - ${convertedDateAndTime.substring(5, 10)} </div>
-    `;
-    return description;
 }
 
