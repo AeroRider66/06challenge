@@ -11,6 +11,7 @@ const error = document.getElementById('error');
 const units = 'imperial'; //can be imperial or metric
 let temperatureSymobol = units == 'imperial' ? "°F" : "°C";
 
+//to get weather for a given city
 async function fetchWeather() {
     try {
         weatherContainer.innerHTML = '';
@@ -46,4 +47,3 @@ async function fetchWeather() {
         console.log(error);
     }
 }
-
