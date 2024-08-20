@@ -2,7 +2,7 @@
 // const apiKey = '{{OpenWeatherMap_API_KEY_HERE}};'
 const apiKey = '{{27b2d129fc17682d877658d7176b8532}};'
 
-https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
 const weatherContainer = document.getElementById("weather");
 const city = document.getElementById("city");
@@ -22,6 +22,7 @@ async function fetchWeather() {
         const cnt = 10;
         const cityInputtedByUser = document.getElementById('cityInput').value;
 
+        // how to break this into the daily units?
         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInputtedByUser}&appid=${apiKey}&units=${units}&cnt=${cnt}`;
 
 
@@ -35,12 +36,12 @@ async function fetchWeather() {
         }
         //Display weather data for each 3 hour increment
         data.list.forEach(dailyWeatherData => {
-            const hourlyWeatherDataDiv = createWeatherDescription(dailyWeatherData);
+            const dailyWeatherDataDiv = createWeatherDescription(dailyWeatherData);
             weatherContainer.appendChild(dailyWeatherDataDiv);
         });
 
         // Display city name based on latitude and longitude
-        city.innerHTML = `Hourly Weather for ${data.city.name}`;
+        city.innerHTML = `Daily Weather for ${data.city.name}`;
 
     } catch (error) {
         console.log(error);
