@@ -1,5 +1,6 @@
 
 body {
+    {
     font-family: Courier, sans-serif;
     text-align: center;
     color: white;
@@ -15,4 +16,5 @@ input {
 .weather_description {
     color: white;
     margin-top: 2rem;
+}
 }
