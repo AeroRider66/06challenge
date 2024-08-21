@@ -58,6 +58,21 @@ async function fetchWeather() {
 }
 
 
+
+function createWeatherDescription(weatherData) {
+    
+    const description = document.createElement("div");
+    const convertedDateAndTime = convertToLocalTime(weatherData.dt);
+
+    // '2023-11-07 07:00:00 PM'
+    description.innerHTML = `
+        <div class = "weather_description">${weatherData.main.temp}${temperatureSymobol} - ${convertedDateAndTime.substring(10)} - ${convertedDateAndTime.substring(5, 10)} </div>
+    `;
+    return description;
+}
+
+
+
 // I don't think we would have to convert from UNIX time, because we have
 // "dt_txt": "2024-08-22 03:00:00"
 // provided for each JSON response.   UNLESS it's easier to take UNIX time directly into the locale date/time.
