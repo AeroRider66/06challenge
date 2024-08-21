@@ -2,7 +2,16 @@
 // const apiKey = '{{OpenWeatherMap_API_KEY_HERE}};'
 const apiKey = '{{27b2d129fc17682d877658d7176b8532}};'
 
-// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
+//  27b2d129fc17682d877658d7176b8532
+
+//====================================
+// this no shit works!!!!
+// https://api.openweathermap.org/data/2.5/forecast?q=houston&appid=27b2d129fc17682d877658d7176b8532
+// ===================================
+
+// https://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=27b2d129fc17682d877658d7176b8532&units=imperial&cnt=24
+
+
 
 const weatherContainer = document.getElementById("weather");
 const city = document.getElementById("city");
@@ -49,24 +58,6 @@ async function fetchWeather() {
 }
 
 
-function convertToLocalTime(dt) {
-
-    // Create a new Date object by multiplying the Unix timestamp by 1000 to convert it to milliseconds
-    // Will produce a time in the local timezone of user's computer
-    const date = new Date(dt * 1000);
-
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based, so add 1
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours() % 12 || 12).padStart(2, '0'); // Convert 24-hour to 12-hour format
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    const period = date.getHours() >= 12 ? 'PM' : 'AM'; // Determine AM/PM
-
-    // Formatted date string in the format: YYYY-MM-DD hh:mm:ss AM/PM
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${period}`;
-
-}
 
 function createWeatherDescription(weatherData) {
     
@@ -80,3 +71,35 @@ function createWeatherDescription(weatherData) {
     return description;
 }
 
+
+
+// I don't think we would have to convert from UNIX time, because we have
+// "dt_txt": "2024-08-22 03:00:00"
+// provided for each JSON response.   UNLESS it's easier to take UNIX time directly into the locale date/time.
+// The time is parsed into 3 hour increments on the 0,3,6,9 hour marks.
+// The first API JSON response uses the NEXT 3's time (i.e. if it's currently 0200, the data passed will be for 0300)
+
+// Regardless of which way we go, we will need to convert the "dt_txt" value from UTC into local time OR the "dt" UNIX time to locale time.  
+//I'm a little unsure of the formating and the dateToString and timeToString methods 
+
+
+
+
+// LIKELY DON"T NEED THIS
+// ================================
+// function convertTimeDate() {
+
+//     // pull from openweather json response
+//     let unixTimestamp = 1111111;
+
+//     // Convert to milliseconds and
+//     // then create a new Date object
+//     let dateObj = new Date(unixTimestamp * 1000);
+//     let utcString = dateObj.toUTCString();
+
+//     let time = utcString.slice(-11, -4);
+
+//     console.log(time);
+// }
+// convertTimestamptoTime();
+//  ========================================
