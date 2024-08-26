@@ -1,6 +1,6 @@
 // Use your own OpenWeatherMap API Key below
 // const apiKey = '{{OpenWeatherMap_API_KEY_HERE}};'
-const apiKey = '{{27b2d129fc17682d877658d7176b8532}};'
+const apiKey = '27b2d129fc17682d877658d7176b8532'
 
 //  27b2d129fc17682d877658d7176b8532
 
@@ -9,70 +9,93 @@ const apiKey = '{{27b2d129fc17682d877658d7176b8532}};'
 // https://api.openweathermap.org/data/2.5/forecast?q=houston&appid=27b2d129fc17682d877658d7176b8532
 // ===================================
 
-// https://api.openweathermap.org/data/2.5/forecast?q=Houston&appid=27b2d129fc17682d877658d7176b8532&units=imperial&cnt=24
+// https://api.openweathermap.org/data/2.5/forecast?q=whyAmIHere&appid=27b2d129fc17682d877658d7176b8532&units=imperial&cnt=24
 
+// ???
+document.querySelector('button').addEventListener('click', renderWeather())
 
+// I think it should call fetchWeather on click, but I can't figure out how to capture the cityName
+document.querySelector('button').addEventListener('click', catchCityName(cityName))
+
+fetchWeather(cityName);
+
+// ==============================================================
+
+function catchCityName(cityInput) {
+    let cityName = document.getElementById("cityInput").value;
+}
+
+// ========================================================================
 
 const weatherContainer = document.getElementById("weather");
 const city = document.getElementById("city");
-const error = document.getElementById('error');
+
+
+// if(doesCityExist)
+// const error = document.getElementById('error');
+// do we really need this?  The JSON file has a message field that says city not found
 
 const units = 'imperial'; //can be imperial or metric
-let temperatureSymobol = units == 'imperial' ? "°F" : "°C";
+let temperatureSymbol = units == 'imperial' ? "°F" : "°C";
 
-//to get weather for a given city
-async function fetchWeather() {
+
+function createWeatherDescription(weatherData) {
+    const description = document.createElement("div");
+
+    const convertedDateAndTime = convertToLocalTime(weatherData.dt);
+
+    description.innerHTML = `
+        <div class = "weather_description">${weatherData.main.temp}${temperatureSymbol} - ${convertedDateAndTime.substring(10)} - ${convertedDateAndTime.substring(5, 10)} </div>
+    `;
+    return description;
+}
+
+/**==================================================================
+ * takes city name
+ * returns weather data for city (all data from API
+ */
+async function fetchWeather(city) {
     try {
-        weatherContainer.innerHTML = '';
-        error.innerHTML = '';
-        city.innerHTML = '';
-
-
         const cnt = 10;
-        const cityInputtedByUser = document.getElementById('cityInput').value;
 
         // how to break this into the daily units?
-        const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInputtedByUser}&appid=${apiKey}&units=${units}&cnt=${cnt}`;
-
+        const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${myCity}&appid=${apiKey}&units=${units}&cnt=${cnt}`;
 
         const response = await fetch(apiUrl);
         const data = await response.json();
 
         //Display error if user types invalid city or no city
         if (data.cod == '400' || data.cod == '404') {
-            error.innerHTML = `Not valid city. Please input another city`;
-            return;
+            console.error(data.cod, data.message);
+            return [] ;
         }
-        //Display weather data for each 3 hour increment
-        data.list.forEach(dailyWeatherData => {
-            const dailyWeatherDataDiv = createWeatherDescription(dailyWeatherData);
-            weatherContainer.appendChild(dailyWeatherDataDiv);
-        });
 
-        // Display city name based on latitude and longitude
-        city.innerHTML = `Daily Weather for ${data.city.name}`;
+        const weatherHighTemp = d
+
+
+        return data.list;
 
     } catch (error) {
         console.log(error);
     }
 }
+// ====================================================================
+
+function renderWeather () {
+    // get city (cityInput) from the DOM  - ? bring in using the id= input from HTML
 
 
+    // call fetch weather with the city name
 
-function createWeatherDescription(weatherData) {
-    
-    const description = document.createElement("div");
-    const convertedDateAndTime = convertToLocalTime(weatherData.dt);
+    fetchWeather(city);
 
-    // '2023-11-07 07:00:00 PM'
-    description.innerHTML = `
-        <div class = "weather_description">${weatherData.main.temp}${temperatureSymobol} - ${convertedDateAndTime.substring(10)} - ${convertedDateAndTime.substring(5, 10)} </div>
-    `;
-    return description;
+    console.log("City Name", city);
+    // receive data (city) - this does not come from the JSON
+    // render to DOM
+    //
 }
 
-
-
+// =============================================================================
 // I don't think we would have to convert from UNIX time, because we have
 // "dt_txt": "2024-08-22 03:00:00"
 // provided for each JSON response.   UNLESS it's easier to take UNIX time directly into the locale date/time.
@@ -81,6 +104,13 @@ function createWeatherDescription(weatherData) {
 
 // Regardless of which way we go, we will need to convert the "dt_txt" value from UTC into local time OR the "dt" UNIX time to locale time.  
 //I'm a little unsure of the formating and the dateToString and timeToString methods 
+
+//===========================================================
+// may not be needed since the JSON already contains a field that says that there is no city if that happens
+// const doesCityExist = (obj, value) => {
+//     return Object.values(obj).includes(value);
+// };
+
 
 
 
@@ -103,3 +133,43 @@ function createWeatherDescription(weatherData) {
 // }
 // convertTimestamptoTime();
 //  ========================================
+
+
+// //to get weather for a given city
+
+// async function fetchWeather() {
+//     try {
+//         weatherContainer.innerHTML = '';
+//         error.innerHTML = '';
+//         city.innerHTML = '';
+//
+//
+//         const cnt = 10;
+//         const cityInputtedByUser = document.getElementById('cityInput').value;
+//
+//         // how to break this into the daily units?
+//         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInputtedByUser}&appid=${apiKey}&units=${units}&cnt=${cnt}`;
+//
+//
+//         const response = await fetch(apiUrl);
+//         const data = await response.json();
+//
+//         //Display error if user types invalid city or no city
+//         if (data.cod == '400' || data.cod == '404') {
+//             error.innerHTML = `Not valid city. Please input another city`;
+//             return;
+//         }
+//         //Display weather data for each 3 hour increment
+//         data.list.forEach(dailyWeatherData => {
+//             const dailyWeatherDataDiv = createWeatherDescription(dailyWeatherData);
+//             weatherContainer.appendChild(dailyWeatherDataDiv);
+//         });
+//
+//         // Display city name based on latitude and longitude
+//         city.innerHTML = `Daily Weather for ${data.city.name}`;
+//
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
