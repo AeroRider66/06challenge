@@ -60,7 +60,7 @@ async function fetchWeather() {
 
 
 function createWeatherDescription(weatherData) {
-    
+
     const description = document.createElement("div");
     const convertedDateAndTime = convertToLocalTime(weatherData.dt);
 
@@ -264,8 +264,8 @@ function renderWeather(weatherData) {
 // The time is parsed into 3 hour increments on the 0,3,6,9 hour marks.
 // The first API JSON response uses the NEXT 3's time (i.e. if it's currently 0200, the data passed will be for 0300)
 
-// Regardless of which way we go, we will need to convert the "dt_txt" value from UTC into local time OR the "dt" UNIX time to locale time.  
-//I'm a little unsure of the formating and the dateToString and timeToString methods 
+// Regardless of which way we go, we will need to convert the "dt_txt" value from UTC into local time OR the "dt" UNIX time to locale time.
+//I'm a little unsure of the formating and the dateToString and timeToString methods
 
 
 
