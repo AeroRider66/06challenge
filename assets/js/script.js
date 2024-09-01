@@ -7,6 +7,7 @@
 
 // https://api.openweathermap.org/data/2.5/forecast?q=whyAmIHere&appid=27b2d129fc17682d877658d7176b8532&units=imperial&cnt=24
 
+
 const apiKey = '27b2d129fc17682d877658d7176b8532'
 
 // for debug so can adjust count to get 5 days
@@ -29,13 +30,19 @@ async function handleSubmit() {
     const cityName = cityNameInput.value
 
     // TODO validate city?
+    await loadWeather(cityName)
 
+}
+async function handleHistoryButton(cityName) {
+    await loadWeather(cityName)
+}
+
+async function loadWeather(cityName) {
     // fetch data (fetchData func)
     const data = await fetchWeather(cityName)
 
     renderWeather(data, cityName)
 }
-
 
 // TODO receive data (city) for this function (this will be the full list of the JSON data received (all 24 of them).
 
