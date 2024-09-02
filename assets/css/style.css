@@ -1,6 +1,5 @@
 
 body {
-    {
     font-family: Courier, sans-serif;
     text-align: center;
     color: white;
@@ -17,4 +16,18 @@ input {
     color: white;
     margin-top: 2rem;
 }
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.col {
+    flex-grow: 1;
+    flex-basis: 0;
+
+    border: 1px solid black;
 }
