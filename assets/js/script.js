@@ -1,12 +1,9 @@
-//  27b2d129fc17682d877658d7176b8532
+//  api key === 27b2d129fc17682d877658d7176b8532
 
 //====================================
 // this no shit works!!!!
 // https://api.openweathermap.org/data/2.5/forecast?q=houston&appid=27b2d129fc17682d877658d7176b8532
 // ===================================
-
-// https://api.openweathermap.org/data/2.5/forecast?q=whyAmIHere&appid=27b2d129fc17682d877658d7176b8532&units=imperial&cnt=24
-
 
 const apiKey = '27b2d129fc17682d877658d7176b8532'
 
@@ -21,7 +18,6 @@ const weatherTypeImages = {
     'Rain': 'rain.png',
     'Clear': 'clear.png'
 };
-
 
 document.querySelector('button').addEventListener('click', handleSubmit)
 

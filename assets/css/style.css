@@ -28,6 +28,48 @@ input {
 .col {
     flex-grow: 1;
     flex-basis: 0;
-
     border: 1px solid black;
+}
+.form {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.col-left {
+    flex-grow: 1;
+    flex-basis: 0;
+    color: purple;
+    background-color: lightgreen;
+    border: 1px solid black;
+}
+.col-right {
+    flex-grow: 1;
+    flex-basis: 0;
+    color: forestgreen;
+    background-color: sandybrown;
+}
+.forecast-table {
+    display: table;
+}
+.day-row {
+    display: table-row;
+    flex-flow: column nowrap;
+}
+.col-day {
+    display: table-cell;
+    width: 30%;
+    text-align: center;
+    color: blue;
+}
+.col-icon {
+    display: table-cell;
+    width: 50%;
+    text-align: center;
+    color: red;
+}
+.col-data {
+    display: table-cell;
+    width: 70%;
+    text-align: center;
+    color: chartreuse;
 }
