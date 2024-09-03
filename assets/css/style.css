@@ -7,11 +7,6 @@ body {
     background-color: #032541;
 }
 
-input {
-    margin-top: 2rem;
-    padding: 1rem;
-}
-
 .weather_description {
     color: white;
     margin-top: 2rem;
@@ -25,48 +20,70 @@ input {
     top: 0;
     left: 0;
 }
+
 .col {
     flex-grow: 1;
     flex-basis: 0;
     border: 1px solid black;
 }
-.form {
-    flex-direction: column;
-    flex-grow: 1;
-    flex-basis: 0;
-}
+
 .col-left {
-    flex-grow: 1;
-    flex-basis: 0;
     color: purple;
     background-color: lightgreen;
-    border: 1px solid black;
 }
+
+.form {
+    padding: 50px 0;
+}
+
+.form p {
+    padding: 0;
+    margin: 0;
+}
+.form input {
+    margin-top: 0px;
+    padding: 1rem;
+}
+
+.form button {
+    background-color: purple;
+    color: white;
+}
+
+.city-button button {
+    padding: 5px;
+    color: white;
+    background-color: #032541;
+}
+
 .col-right {
-    flex-grow: 1;
-    flex-basis: 0;
     color: forestgreen;
-    background-color: sandybrown;
+    background-color: cadetblue;
 }
+
 .forecast-table {
     display: table;
 }
+
 .day-row {
     display: table-row;
     flex-flow: column nowrap;
 }
+
 .col-day {
     display: table-cell;
     width: 30%;
     text-align: center;
     color: blue;
 }
+
 .col-icon {
     display: table-cell;
     width: 50%;
     text-align: center;
     color: red;
 }
+
 .col-data {
     display: table-cell;
     width: 70%;
