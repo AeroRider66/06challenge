@@ -29,6 +29,7 @@ async function handleSubmit() {
     await loadWeather(cityName)
 
 }
+
 async function handleHistoryButton(cityName) {
     await loadWeather(cityName)
 }
@@ -49,7 +50,7 @@ async function loadWeather(cityName) {
 // TODO as each date/time is selected as one that we want, then will need to pick the values from that specific date/time:
 // TODO
 
-function getHoursFromUnixTime (dt) {
+function getHoursFromUnixTime(dt) {
     const date = new Date(dt * 1000)
     return (date.getUTCHours());
 }
@@ -59,7 +60,7 @@ function renderWeather(weatherData, cityName) {
 // City name (from cityName) - debug point
     console.log(cityName);
 
-    if(getHoursFromUnixTime(weatherData[0].dt) > 12) {
+    if (getHoursFromUnixTime(weatherData[0].dt) > 12) {
         renderWeatherItem(weatherData[0])
     }
 
@@ -68,23 +69,99 @@ function renderWeather(weatherData, cityName) {
         renderWeatherItem(item);
     }
 }
+//
+// <div className="day-weather">
+//     <div className="day-name">
+//         Monday
+//     </div>
+//     <div className="day-icon">
+//         <img src="assets/images/clouds.png" alt="icon showing weather type"/>
+//     </div>
+//     <div className="day-data">
+//         <table>
+//             <tbody>
+//             <tr>
+//                 <th>temperature</th>
+//                 <td>95&deg;</td>
+//             </tr>
+//             <tr>
+//                 <th>humidity</th>
+//                 <td>75%</td>
+//             </tr>
+//             <tr>
+//                 <th>Wind speed</th>
+//                 <td>1000</td>
+//             </tr>
+//             </tbody>
+//         </table>
+//     </div>
+// </div>
 
 function renderWeatherItem(item) {
 // weather icon = data.list.weather.main
-    const div = document.createElement('div');
+    const containerDiv = document.createElement('div');
+    containerDiv.classList.add('day-weather');
+    weatherContainer.append(containerDiv);
     const weatherTemp = item.main.temp;
     const weatherHumidity = item.main.humidity;
     const weatherWind = item.wind.speed;
     const weatherType = item.weather[0].main;
+    const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
+    const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
     console.log(item);
+
+    // create div for day name i.e Monday
+    const dayNameDiv = document.createElement('div');
+    dayNameDiv.classList.add('day-name');
+    dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us',{ weekday: 'long' });
+    containerDiv.append(dayNameDiv);
+
+    // create div for day icon
+    const dayIconDiv = document.createElement('div');
+    dayIconDiv.classList.add('day-icon');
+    // identify weather icon from weather type
     if (weatherTypeImages[weatherType]) {
         const img = document.createElement('img');
         img.src = `./assets/images/${weatherTypeImages[weatherType]}`
-        div.append(img)
+        dayIconDiv.append(img);
     } else {
         // Handle Unrecognised
     }
-    weatherContainer.append(div);
+    containerDiv.append(dayIconDiv);
+
+//     <div className="day-data">
+//         <table>
+//             <tbody>
+//             <tr>
+//                 <th>temperature</th>
+//                 <td>95&deg;</td>
+//             </tr>
+//             <tr>
+//                 <th>humidity</th>
+//                 <td>75%</td>
+//             </tr>
+//             <tr>
+//                 <th>Wind speed</th>
+//                 <td>1000</td>
+//             </tr>
+//             </tbody>
+//         </table>
+//     </div>
+
+    // create div for day data
+    const dayDataDiv = document.createElement('div');
+    dayDataDiv.classList.add('day-data');
+
+    // build weather table
+    const dataTable = document.createElement('table');
+    dayDataDiv.append(dataTable);
+    const tbody = document.createElement('tbody');
+    dataTable.append(tbody);
+
+    // TODO: create loop for each row, and do header th and data td
+
+
+
 }
 
 

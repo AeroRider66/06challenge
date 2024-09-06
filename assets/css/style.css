@@ -90,3 +90,13 @@ body {
     text-align: center;
     color: chartreuse;
 }
+
+.day-weather {
+   display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 50px;
+}
+.day-icon img {
+    width: 50px;
+}
