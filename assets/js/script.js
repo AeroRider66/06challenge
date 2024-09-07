@@ -106,17 +106,19 @@ function renderWeatherItem(item) {
     const weatherWind = item.wind.speed;
     const weatherType = item.weather[0].main;
     const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
+    //console.log("text parameters", displayWeatherParameters);
     const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
+    //console.log("actual data", displayWeatherData);
     console.log("built item",item);
 
     // create div for day name i.e Monday
     const dayNameDiv = document.createElement('div');
     dayNameDiv.classList.add('day-name');
     dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us',{ weekday: 'long' });
-    console.log("day of week", dayNameDiv.innerText);
-    const wordDay = dayNameDiv.innerText;
+    const dayWord = dayNameDiv.innerText;
+    console.log("day of week", dayWord);
+    document.getElementById("nameOfDay").innerText = dayWord;
     containerDiv.append(dayNameDiv);
-
 
     // create div for day icon
     const dayIconDiv = document.createElement('div');
@@ -161,10 +163,36 @@ function renderWeatherItem(item) {
     dataTable.append(tbody);
 
     // TODO: create loop for each row, and do header th and data td
+    //nested loop
+    // per line (tr) will loop through 1 th and 1 td
+    // then will increment tr for second row with same 1 th and 1 td
+    // since each tr only contains a single th/td pair, we only have
+    // to loop through the rows (total of 3, max index of 2)
 
+    // const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
+    // const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
+
+    for(let i = 0 ; i < 3 ; i++) {
+        const tr_row = document.createElement('tr');
+
+        const th_weatherParameters = document.createElement('th');
+        const td_weatherData = document.createElement('td');
+
+        th_weatherParameters.innerText = displayWeatherParameters[i];
+        //console.log("word parameter", th_weatherParameters);
+        tr_row.append(th_weatherParameters);
+
+        td_weatherData.innerText = displayWeatherData[i];
+        //console.log("data parameter", td_weatherData);
+        tr_row.append(td_weatherData);
+
+        console.log("row info for cycle", tr_row);
+
+        tbody.append(tr_row);
+        console.log("tbody info", tbody);
+    }
 
 }
-
 
 async function fetchWeather(cityName) {
     try {
