@@ -57,7 +57,7 @@ body {
 }
 
 .col-right {
-    color: forestgreen;
+    color: black;
     background-color: cadetblue;
 }
 
@@ -77,6 +77,10 @@ body {
     color: blue;
 }
 
+.day-name {
+    display: table-cell;
+    font-weight: bold;
+}
 .col-icon {
     display: table-cell;
     width: 50%;
@@ -95,7 +99,7 @@ body {
    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 50px 50px;
+    padding: 25px 25px;
 }
 .day-icon img {
     width: 50px;

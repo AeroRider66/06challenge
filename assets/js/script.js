@@ -46,9 +46,8 @@ async function loadWeather(cityName) {
 // TODO need to decide what to call that list of JSON values
 
 // TODO need to pick out the values of the JSON data to be used:
-// how to pick the times from each day that are needed.  Use the 'date.xxx method (maybe on the 'dt' value from each JSON item
+
 // TODO as each date/time is selected as one that we want, then will need to pick the values from that specific date/time:
-// TODO
 
 function getHoursFromUnixTime(dt) {
     const date = new Date(dt * 1000)
@@ -108,13 +107,16 @@ function renderWeatherItem(item) {
     const weatherType = item.weather[0].main;
     const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
     const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
-    console.log(item);
+    console.log("built item",item);
 
     // create div for day name i.e Monday
     const dayNameDiv = document.createElement('div');
     dayNameDiv.classList.add('day-name');
     dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us',{ weekday: 'long' });
+    console.log("day of week", dayNameDiv.innerText);
+    const wordDay = dayNameDiv.innerText;
     containerDiv.append(dayNameDiv);
+
 
     // create div for day icon
     const dayIconDiv = document.createElement('div');
@@ -159,7 +161,6 @@ function renderWeatherItem(item) {
     dataTable.append(tbody);
 
     // TODO: create loop for each row, and do header th and data td
-
 
 
 }
