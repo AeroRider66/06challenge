@@ -12,6 +12,7 @@ const cnt = 40;
 
 const cityNameInput = document.getElementById("cityName")
 const weatherContainer = document.getElementById("weather");
+const historyButtons = document.getElementById("historyButtons");
 const weatherTypeImages = {
     'Clouds': 'clouds.png',
     'Rain': 'rain.png',
@@ -39,67 +40,28 @@ async function loadWeather(cityName) {
     const data = await fetchWeather(cityName)
 
     renderWeather(data, cityName)
+
+    addToHistory(cityName)
 }
-    // save city name and refresh on button selection
-    // render buttons
-// ==================================
 
-// initialize first run with cityLoop.length = 0, but must keep the
-// running list of last 5 cities.
-//
-// cityLoop is array with names of the last 5 (or less) cities
-// check current length of cityLoop.
-// if less than 5, then append new city to the cityLoop array
-// If greater than 5 then do a shift(remove earliest from array)
-// and push(add to end of array)
-//
-// Somehow update a variable to show new length of cityLoop array
-// to allow for comparison next time through.
-//
-// render last 5 (or less) cities as buttons available to do a
-// new search on (the only thing to hold is the name - a new forecast
-// will be done when the button is selected)
 
-// ==================================
-//
-//     // do I need to put it as .value?
-//     let citySave = cityNameInput.value;
-//
-//     if(cityLoop.length > 5) {
-//         appendToCityLoop(citySave)
-//     }
-//
-//     if(cityLoop.length < 5) => {
-//
-// }
-//     function startCityArray (citySave) {
-//
-//     }
-//=====================================
-//     if(newCitySaveLength.length < 5) {
-//
-//         let cityLoop = new Array(5);
-//         for (i = 0; i < 4; i++) {
-//             cityLoop.push(citySave);
-//         }
-//
-//     else {
-//             cityLoop.shift();
-//             cityLoop.push(citySave);
-//         }
-//     }
-//
-//     if (i > 4) {
-//         cityLoop.shift();
-//
-//     };
-//     for(i = 0; i > 4; i++) {}
-//
-//         if (cityLoop[i])
-//==============================================
+function addToHistory(cityName) {
+    cityHistory.unshift(cityName)
+    renderHistory()
+}
 
-// ==================================
-    // future check for dupe
+function renderHistory() {
+    historyButtons.innerHTML = "";
+    for (let i = 0; i < 5 && i < cityHistory.length; i++) {
+        const cityButtonDiv = document.createElement("div");
+        cityButtonDiv.classList.add("city-button");
+        const button = document.createElement("button");
+        button.innerText = cityHistory[i];
+        button.addEventListener('click', () => handleHistoryButton(cityHistory[i]));
+        cityButtonDiv.append(button);
+        historyButtons.append(cityButtonDiv);
+    }
+}
 
 
 // TODO receive data (city) for this function (this will be the full list of the JSON data received (all 24 of them).
@@ -146,7 +108,7 @@ function renderWeatherItem(item) {
     // create div for day name i.e Monday
     const dayNameDiv = document.createElement('div');
     dayNameDiv.classList.add('day-name');
-    dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us',{ weekday: 'long' });
+    dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us', {weekday: 'long'});
     dayWeatherDiv.append(dayNameDiv);
 
     // create div for day icon
@@ -195,7 +157,7 @@ function renderWeatherItem(item) {
     // const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
     // const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
 
-    for(let i = 0 ; i < 3 ; i++) {
+    for (let i = 0; i < 3; i++) {
         const tr_row = document.createElement('tr');
 
         const th_weatherParameters = document.createElement('th');
