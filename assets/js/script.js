@@ -42,8 +42,63 @@ async function loadWeather(cityName) {
 }
     // save city name and refresh on button selection
     // render buttons
-    let citySave = cityName
+// ==================================
 
+// initialize first run with cityLoop.length = 0, but must keep the
+// running list of last 5 cities.
+//
+// cityLoop is array with names of the last 5 (or less) cities
+// check current length of cityLoop.
+// if less than 5, then append new city to the cityLoop array
+// If greater than 5 then do a shift(remove earliest from array)
+// and push(add to end of array)
+//
+// Somehow update a variable to show new length of cityLoop array
+// to allow for comparison next time through.
+//
+// render last 5 (or less) cities as buttons available to do a
+// new search on (the only thing to hold is the name - a new forecast
+// will be done when the button is selected)
+
+// ==================================
+//
+//     // do I need to put it as .value?
+//     let citySave = cityNameInput.value;
+//
+//     if(cityLoop.length > 5) {
+//         appendToCityLoop(citySave)
+//     }
+//
+//     if(cityLoop.length < 5) => {
+//
+// }
+//     function startCityArray (citySave) {
+//
+//     }
+//=====================================
+//     if(newCitySaveLength.length < 5) {
+//
+//         let cityLoop = new Array(5);
+//         for (i = 0; i < 4; i++) {
+//             cityLoop.push(citySave);
+//         }
+//
+//     else {
+//             cityLoop.shift();
+//             cityLoop.push(citySave);
+//         }
+//     }
+//
+//     if (i > 4) {
+//         cityLoop.shift();
+//
+//     };
+//     for(i = 0; i > 4; i++) {}
+//
+//         if (cityLoop[i])
+//==============================================
+
+// ==================================
     // future check for dupe
 
 
