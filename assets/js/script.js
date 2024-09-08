@@ -12,12 +12,13 @@ const cnt = 40;
 
 const cityNameInput = document.getElementById("cityName")
 const weatherContainer = document.getElementById("weather");
-
 const weatherTypeImages = {
     'Clouds': 'clouds.png',
     'Rain': 'rain.png',
     'Clear': 'clear.png'
 };
+const cityHistory = [];
+
 
 document.querySelector('button').addEventListener('click', handleSubmit)
 
@@ -27,7 +28,6 @@ async function handleSubmit() {
 
     // TODO validate city?
     await loadWeather(cityName)
-
 }
 
 async function handleHistoryButton(cityName) {
@@ -40,6 +40,12 @@ async function loadWeather(cityName) {
 
     renderWeather(data, cityName)
 }
+    // save city name and refresh on button selection
+    // render buttons
+    let citySave = cityName
+
+    // future check for dupe
+
 
 // TODO receive data (city) for this function (this will be the full list of the JSON data received (all 24 of them).
 
@@ -55,9 +61,9 @@ function getHoursFromUnixTime(dt) {
 }
 
 function renderWeather(weatherData, cityName) {
-
+    weatherContainer.innerHTML = '';
 // City name (from cityName) - debug point
-    console.log(cityName);
+    // console.log(cityName);
 
     if (getHoursFromUnixTime(weatherData[0].dt) > 12) {
         renderWeatherItem(weatherData[0])
@@ -68,57 +74,25 @@ function renderWeather(weatherData, cityName) {
         renderWeatherItem(item);
     }
 }
-//
-// <div className="day-weather">
-//     <div className="day-name">
-//         Monday
-//     </div>
-//     <div className="day-icon">
-//         <img src="assets/images/clouds.png" alt="icon showing weather type"/>
-//     </div>
-//     <div className="day-data">
-//         <table>
-//             <tbody>
-//             <tr>
-//                 <th>temperature</th>
-//                 <td>95&deg;</td>
-//             </tr>
-//             <tr>
-//                 <th>humidity</th>
-//                 <td>75%</td>
-//             </tr>
-//             <tr>
-//                 <th>Wind speed</th>
-//                 <td>1000</td>
-//             </tr>
-//             </tbody>
-//         </table>
-//     </div>
-// </div>
 
 function renderWeatherItem(item) {
-// weather icon = data.list.weather.main
-    const containerDiv = document.createElement('div');
-    containerDiv.classList.add('day-weather');
-    weatherContainer.append(containerDiv);
-    const weatherTemp = item.main.temp;
+    const dayWeatherDiv = document.createElement('div');
+    dayWeatherDiv.classList.add('day-weather');
+    weatherContainer.append(dayWeatherDiv);
+
+    const weatherTemp = Math.round(item.main.temp);
     const weatherHumidity = item.main.humidity;
-    const weatherWind = item.wind.speed;
+    const weatherWind = Math.round(item.wind.speed);
     const weatherType = item.weather[0].main;
+
     const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
-    //console.log("text parameters", displayWeatherParameters);
     const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
-    //console.log("actual data", displayWeatherData);
-    console.log("built item",item);
 
     // create div for day name i.e Monday
     const dayNameDiv = document.createElement('div');
     dayNameDiv.classList.add('day-name');
     dayNameDiv.innerText = new Date(item.dt * 1000).toLocaleDateString('en-us',{ weekday: 'long' });
-    const dayWord = dayNameDiv.innerText;
-    console.log("day of week", dayWord);
-    document.getElementById("nameOfDay").innerText = dayWord;
-    containerDiv.append(dayNameDiv);
+    dayWeatherDiv.append(dayNameDiv);
 
     // create div for day icon
     const dayIconDiv = document.createElement('div');
@@ -131,7 +105,7 @@ function renderWeatherItem(item) {
     } else {
         // Handle Unrecognised
     }
-    containerDiv.append(dayIconDiv);
+    dayWeatherDiv.append(dayIconDiv);
 
 //     <div className="day-data">
 //         <table>
@@ -155,19 +129,13 @@ function renderWeatherItem(item) {
     // create div for day data
     const dayDataDiv = document.createElement('div');
     dayDataDiv.classList.add('day-data');
+    dayWeatherDiv.append(dayDataDiv);
 
     // build weather table
     const dataTable = document.createElement('table');
     dayDataDiv.append(dataTable);
     const tbody = document.createElement('tbody');
     dataTable.append(tbody);
-
-    // TODO: create loop for each row, and do header th and data td
-    //nested loop
-    // per line (tr) will loop through 1 th and 1 td
-    // then will increment tr for second row with same 1 th and 1 td
-    // since each tr only contains a single th/td pair, we only have
-    // to loop through the rows (total of 3, max index of 2)
 
     // const displayWeatherParameters = ["Temperature", "Humidity", "Wind-speed"];
     // const displayWeatherData = [weatherTemp, weatherHumidity, weatherWind];
