@@ -6,7 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="a0066dbe-853b-4b3a-8820-f89907970d55" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INSTRUCTIONS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/06-server-side-apis-homework-demo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/OldScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexAlt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/prototype.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/INSTRUCTIONS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/06-server-side-apis-homework-demo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/barometer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/clear.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/clouds.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/drizzle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/humidity.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/mist.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/rain.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/images/snow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/js/OldScript.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/assets/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/indexAlt.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +68,7 @@
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
     "JavaScript Debug.index.html.executor": "Run",
+    "JavaScript Debug.indexAlt.html.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/ladbu/utsa_bootcamp/FSF-PT-EAST-APRIL-040824",
@@ -59,12 +81,16 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.indexAlt.html">
+    <configuration name="indexAlt.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/06challenge/indexAlt.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/06challenge/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.indexAlt.html" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
@@ -106,7 +132,7 @@
       <workItem from="1725652085254" duration="18888000" />
       <workItem from="1725713815359" duration="23658000" />
       <workItem from="1725803992382" duration="13523000" />
-      <workItem from="1725916184094" duration="6964000" />
+      <workItem from="1725916184094" duration="7626000" />
     </task>
     <task id="LOCAL-00001" summary="hope this workS!">
       <option name="closed" value="true" />
