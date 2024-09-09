@@ -1,6 +1,7 @@
-# 06challenge
+# Challenge 06 Server-Side APIs
 
-
+## Startup Instructions
+Access web page via URL 
 ## User story
 AS A traveler
 I WANT to see the weather outlook for multiple cities
