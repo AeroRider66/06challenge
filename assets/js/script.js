@@ -56,7 +56,7 @@ function renderHistory() {
         const cityButtonDiv = document.createElement("div");
         cityButtonDiv.classList.add("city-button");
         const button = document.createElement("button");
-        button.innerText = cityHistory[i];
+        button.innerText = toTitleCase(cityHistory[i]);
         button.addEventListener('click', () => handleHistoryButton(cityHistory[i]));
         cityButtonDiv.append(button);
         historyButtons.append(cityButtonDiv);
@@ -81,6 +81,9 @@ function renderWeather(weatherData, cityName) {
     weatherContainer.innerHTML = '';
 // City name (from cityName) - debug point
     // console.log(cityName);
+    const heading = document.createElement("h1");
+    heading.innerText = toTitleCase(cityName);
+    weatherContainer.append(heading);
 
     if (getHoursFromUnixTime(weatherData[0].dt) > 12) {
         renderWeatherItem(weatherData[0])
@@ -198,4 +201,10 @@ async function fetchWeather(cityName) {
     } catch (error) {
         console.log(error);
     }
+}
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+    );
 }
